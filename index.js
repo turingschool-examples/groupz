@@ -8,8 +8,8 @@ var rl = readline.createInterface({
 });
 
 rl.on('line', function(line){
-    console.log(line);
-    if(line === 'n'){
-      rl.close()
-    } 
-})
+  console.log(line);
+  if (line === 'n') {
+    rl.close();
+  }
+});
