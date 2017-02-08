@@ -1,11 +1,12 @@
 {
   "name": "groupz",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "mocha test",
     "lint": "eslint **.js test/**.js",
+    "lint-fix": "eslint **.js test/**.js --fix",
     "pretest": "npm run lint"
   },
   "author": "",
