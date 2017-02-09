@@ -29,10 +29,10 @@ function startGroupApprovalLoop(num){
   if (students.length){
     students = shuffleArray(students);
     var splicedStudents = spliceStudents(num);
-    logStudents(splicedStudents)
-    startAcceptanceLoop(splicedStudents, num)
+    logStudents(splicedStudents);
+    startAcceptanceLoop(splicedStudents, num);
   } else {
-    logGroups(groups)
+    logGroups(groups);
     rl.close();
   }
 }
@@ -48,7 +48,6 @@ function startAcceptanceLoop(splicedStudents, num){
     }
   });
 }
-
 
 function spliceStudents(num){
   var splicedStudents = [];
@@ -69,7 +68,7 @@ function returnToStudentBatch(splicedStudents){
 function logGroups(groups){
   groups.forEach(function(group){
     console.log('');
-    logStudents(group)
+    logStudents(group);
   });
 }
 
