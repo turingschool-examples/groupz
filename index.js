@@ -8,54 +8,75 @@ var rl = readline.createInterface({
   output: process.stdout,
 });
 
-var num;
 var groups = [];
 
-function getInput(content, callback){
-  rl.question(content, function(answer){
-    if (answer.match(/[quit|q]/)) {
-      rl.close();
-    } else if (!answer.match(/\d+/))  {
-      getInput(content, callback);
-    } else {
-      num = parseInt(answer);
-      callback();
-    }
-  });
+function startGroupCountLoop(){
+  rl.question('How Many Students? \n', getGroupCount);
 }
 
-function testGroup(){
+function getGroupCount(answer){
+  if (answer.match(/[quit|q]/)) {
+    rl.close();
+  } else if (!answer.match(/\d+/))  {
+    startGroupCountLoop();
+  } else {
+    var num = parseInt(answer);
+    startGroupApprovalLoop(num);
+  }
+}
+
+function startGroupApprovalLoop(num){
   if (students.length){
     students = shuffleArray(students);
-    var splicedStudents = [];
-    for (var i = 0; i < num; i++){
-      var s = students.pop();
-      splicedStudents.push(s);
-      if (!students.length) {
-        break;
-      }
-    }
-    splicedStudents.forEach(function(s){
-      console.log('* ' + s);
-    });
-    rl.question('Is this group okay?\n (y|n)\n', function(answer){
-      if (answer === 'y') {
-        groups.push(splicedStudents);
-        testGroup();
-      } else {
-        Array.prototype.push.apply(students, splicedStudents);
-        testGroup();
-      }
-    });
+    var splicedStudents = spliceStudents(num);
+    logStudents(splicedStudents)
+    startAcceptanceLoop(splicedStudents, num)
   } else {
-    groups.forEach(function(group){
-      console.log('');
-      group.forEach(function(s){
-        console.log('* ' + s);
-      });
-    });
+    logGroups(groups)
     rl.close();
   }
 }
 
-getInput('How Many Students? \n', testGroup);
+function startAcceptanceLoop(splicedStudents, num){
+  rl.question('Is this group okay?\n (y|n)\n', function(answer){
+    if (answer === 'y') {
+      groups.push(splicedStudents);
+      startGroupApprovalLoop(num);
+    } else {
+      returnToStudentBatch(splicedStudents);
+      startGroupApprovalLoop(num);
+    }
+  });
+}
+
+
+function spliceStudents(num){
+  var splicedStudents = [];
+  for (var i = 0; i < num; i++){
+    var s = students.pop();
+    splicedStudents.push(s);
+    if (!students.length) {
+      break;
+    }
+  }
+  return splicedStudents;
+}
+
+function returnToStudentBatch(splicedStudents){
+  Array.prototype.push.apply(students, splicedStudents);
+}
+
+function logGroups(groups){
+  groups.forEach(function(group){
+    console.log('');
+    logStudents(group)
+  });
+}
+
+function logStudents(group){
+  group.forEach(function(s){
+    console.log('* ' + s);
+  });
+}
+
+startGroupCountLoop();

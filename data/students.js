@@ -3,7 +3,6 @@ module.exports = [
   'Andrew Crist',
   'Chelsea Skovgaard',
   'Christine Gamble',
-  'Gabrielle Procell',
   'Graham Nessler',
   'Hilary Lewis',
   'Ian Lancaster',
@@ -12,7 +11,6 @@ module.exports = [
   'Lacey Knaff',
   'Maia Stone',
   'Matthew Kaufman',
-  'Mike Ziccardi',
   'Nick Chambers',
   'Ryan Westlake'
 ]

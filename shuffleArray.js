@@ -1,6 +1,7 @@
 /**
  * Randomize array element order in-place.
  * Using Durstenfeld shuffle algorithm.
+ * http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
  */
 
 module.exports = function(array){
