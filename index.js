@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 var fs = require('fs');
+var path = require('path');
+
 var readline = require('readline');
 
 var GroupDialog = require('./lib/GroupDialog.js');
@@ -9,7 +11,7 @@ var rl = readline.createInterface({
   output: process.stdout,
 });
 
-fs.readFile('./data/1608.txt', function (err, data) {
+fs.readFile(path.join(__dirname, '.', 'data', '1706.txt'), function (err, data) {
   if (err) {
     return console.error(err);
   }
